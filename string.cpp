@@ -43,8 +43,8 @@ class my_string
 		my_string operator +(const my_string &s);
 		bool operator ==(const my_string& s);
 		int length();
-        friend istream & operator >>(const istream& in,my_string &s);
-        friend ostream & operator <<(const ostream &out,const my_string &s);
+        friend istream & operator >>(istream& in,my_string &s);
+        friend ostream & operator <<(ostream &out,const my_string &s);
         friend istream& getline(istream &in,my_string &s);
 };
 
