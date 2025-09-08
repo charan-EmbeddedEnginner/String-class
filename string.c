@@ -1,6 +1,6 @@
 #include<iostream>
-#include<string.h>
-using namespace std;;
+#include<cstring>
+using namespace std;
 
 class my_string
 {
@@ -43,6 +43,9 @@ class my_string
 		my_string operator +(const my_string &s);
 		bool operator ==(const my_string& s);
 		int length();
+        friend istream & operator >>(const istream& in,my_string &s);
+        friend ostream & operator <<(const ostream &out,const my_string &s);
+        friend istream& getline(istream &in,my_string &s);
 };
 
 my_string& my_string::operator =(const my_string &s){//assignment operator overload
@@ -56,6 +59,9 @@ my_string& my_string::operator =(const my_string &s){//assignment operator overl
 			strcpy(p,s.p);
 		}
 		else{
+			if(p){
+			delete []p;
+			}
 			p=0;
 		}
 	}
@@ -88,6 +94,9 @@ my_string my_string::operator +(const my_string &s){
 		o.p=data;
 	}
 	else{
+		if(p){
+			delete []p;
+		}
 		o.p=0;
 	}
 	return o;
@@ -111,14 +120,14 @@ int my_string::length(){
 		return 0;
 }
 
-ostream & operator <<(ostream &out,const my_string &s){
+ostream & operator <<(const ostream &out,const my_string &s){
 	if(s.p){//valid
 		out<<s.p;
 	}
 	return out;
 }
 
-istream & operator >>(istream& in,my_string &s){
+istream & operator >>(const istream& in,my_string &s){
 	int capacity=16;
 	int len=0;
 	char ch=0;
